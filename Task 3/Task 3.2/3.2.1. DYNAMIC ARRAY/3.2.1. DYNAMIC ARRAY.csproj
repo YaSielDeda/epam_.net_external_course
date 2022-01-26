@@ -6,4 +6,8 @@
     <RootNamespace>_3._2._1._DYNAMIC_ARRAY</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicClassLibrary\DynamicClassLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

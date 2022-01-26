@@ -66,6 +66,13 @@ namespace DynamicClassLibrary
         //3. Конструктор, который в качестве параметра принимает коллекцию,
         //   реализующую интерфейс IEnumerable<T>,
         //   создаёт массив нужного размера и копирует в него все элементы из коллекции.
+
+        /// <summary>
+        /// DynamicArray constructor, which accepts at input generic IEnumerable collection
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <exception cref="ArgumentNullException">Throws if provided collection is null</exception>
+        /// <exception cref="ArgumentException">Throws if provided collection isn't implements ICollection</exception>
         public DynamicArray(IEnumerable<T> collection)
         {
             if (collection == null)
@@ -98,6 +105,34 @@ namespace DynamicClassLibrary
             }
             _items[_length] = element;
             _length++;
+        }
+        //5. Метод AddRange, добавляющий в конец массива содержимое коллекции, реализующей интерфейс IEnumerable<T>.
+        //   Обратите внимание, метод должен корректно учитывать число элементов в коллекции с тем,
+        //   чтобы при необходимости расширения массива делать это только один раз вне зависимости от числа элементов в добавляемой коллекции.
+
+        /// <summary>
+        /// Method Adds provided generic IEnumerable collection to DynamicArray inner array
+        /// </summary>
+        /// <param name="collection"></param>
+        /// <exception cref="ArgumentNullException">Throws if provided collection is null</exception>
+        /// <exception cref="ArgumentException">Throws if provided collection isn't implements ICollection</exception>
+        public void AddRange(IEnumerable<T> collection)
+        {
+            if (collection is ICollection<T> coll)
+            {
+                if (coll == null)
+                    throw new ArgumentNullException("Provided collection is null");
+
+                if (Capacity - Length < coll.Count)
+                    Capacity += coll.Count;
+
+                coll.CopyTo(_items, Length);
+
+                _length = _items.Length;
+                _capacity = _length;
+            }
+            else
+                throw new ArgumentException("Provided collection doesn't implements ICollection interface");
         }
         public IEnumerator<T> GetEnumerator()
         {

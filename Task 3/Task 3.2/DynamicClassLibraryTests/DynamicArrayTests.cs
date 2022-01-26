@@ -1,7 +1,6 @@
 using DynamicClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace DynamicClassLibraryTests
 {
@@ -72,12 +71,26 @@ namespace DynamicClassLibraryTests
 
             DynamicArray<char> da = new(arr);
 
-            int increasedCapacity = 16;
+            int increasedCapacity = arr.Length * 2;
 
             da.Add('a');
 
             Assert.AreEqual(increasedCapacity, da.Capacity);
             Assert.AreEqual(arr.Length + 1, da.Length);
+        }
+        [TestMethod]
+        public void Create_Char_DynamicArray_With_Elements_And_Adding_IEnumerable_With_Elements()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c' });
+
+            int daCapacityBeforeMerge = da.Capacity;
+
+            char[] arr = { 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k' };
+
+            da.AddRange(arr);
+
+            Assert.AreEqual(daCapacityBeforeMerge + arr.Length, da.Capacity);
+            Assert.AreEqual(daCapacityBeforeMerge + arr.Length, da.Length);
         }
     }
 }
