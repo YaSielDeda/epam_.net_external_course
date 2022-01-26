@@ -8,7 +8,6 @@ namespace DynamicClassLibrary
     {
         private T[] _items;
         private int _capacity;
-        private const int NUM_OF_RESERVE_ELEMENTS = 5;
         //9. Свойство Capacity — получение ёмкости: длины внутреннего массива.
         public int Capacity { 
             get 
@@ -20,13 +19,14 @@ namespace DynamicClassLibrary
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("Capacity can't be negative");
                 if (value < Length)
-                    throw new ArgumentOutOfRangeException("Capacity can't be less than length");
+                    throw new ArgumentOutOfRangeException("Capacity can't be less than length, data loss will follow");
 
                 if (_capacity != value)
                 {
                     T[] destinationArray = new T[value];
                     Array.Copy(_items, 0, destinationArray, 0, Length);
                     _items = destinationArray;
+                    _capacity = value;
                 }
             } 
         }
@@ -81,13 +81,24 @@ namespace DynamicClassLibrary
                 _items = new T[coll.Count];
                 coll.CopyTo(_items, 0);
                 _length = coll.Count;
-                _capacity = _length + NUM_OF_RESERVE_ELEMENTS;
+                _capacity = _length;
                 return;
             }
             else
                 throw new ArgumentException("Provided collection doesn't implements ICollection interface");
         }
 
+        //4. Метод Add, добавляющий в конец массива один элемент.
+        //   При нехватке места для добавления элемента, ёмкость массива должна удваиваться
+        public void Add(T element)
+        {
+            if (Capacity == Length)
+            {
+                Capacity *= 2;
+            }
+            _items[_length] = element;
+            _length++;
+        }
         public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();

@@ -38,11 +38,9 @@ namespace DynamicClassLibraryTests
         {
             List<char> list = new() { 'a', 'b', 'c' };
 
-            int numberOfReserveElements = 5;
-
             DynamicArray<char> da = new(list);
 
-            Assert.AreEqual(list.Count + numberOfReserveElements, da.Capacity);
+            Assert.AreEqual(list.Count, da.Capacity);
             Assert.AreEqual(list.Count, da.Length);
         }
         [TestMethod]
@@ -51,16 +49,35 @@ namespace DynamicClassLibraryTests
             char[] arr = { 'a', 'b', 'c' };
 
             DynamicArray<char> da = new(arr);
-            
-            int numberOfReserveElements = 5;
 
-            Assert.AreEqual(arr.Length + numberOfReserveElements, da.Capacity);
+            Assert.AreEqual(arr.Length, da.Capacity);
             Assert.AreEqual(arr.Length, da.Length);
         }
-        //[TestMethod]
-        //public void Create_Char_DynamicArray_With_Provided_Char_Collection()
-        //{
+        [TestMethod]
+        public void Create_Char_DynamicArray_WITH_Available_Space_And_Adding_One_Element()
+        {
+            DynamicArray<char> da = new();
 
-        //}
+            int defaultCapacity = 8;
+
+            da.Add('a');
+
+            Assert.AreEqual(defaultCapacity, da.Capacity);
+            Assert.AreEqual(1, da.Length);
+        }
+        [TestMethod]
+        public void Create_Char_DynamicArray_WITHOUT_Available_Space_And_Adding_One_Element()
+        {
+            char[] arr = { 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a' };
+
+            DynamicArray<char> da = new(arr);
+
+            int increasedCapacity = 16;
+
+            da.Add('a');
+
+            Assert.AreEqual(increasedCapacity, da.Capacity);
+            Assert.AreEqual(arr.Length + 1, da.Length);
+        }
     }
 }
