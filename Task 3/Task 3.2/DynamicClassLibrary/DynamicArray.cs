@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DynamicClassLibrary
 {
@@ -18,6 +19,7 @@ namespace DynamicClassLibrary
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("Capacity can't be negative");
+
                 if (value < Length)
                     throw new ArgumentOutOfRangeException("Capacity can't be less than length, data loss will follow");
 
@@ -54,7 +56,7 @@ namespace DynamicClassLibrary
             if (capacity < 0)
                 throw new ArgumentOutOfRangeException("Capacity can't be negative");
             if (capacity == 0)
-                _items = new T[0];
+                _items = Array.Empty<T>();
             else
             {
                 _capacity = capacity;
@@ -133,6 +135,35 @@ namespace DynamicClassLibrary
             }
             else
                 throw new ArgumentException("Provided collection doesn't implements ICollection interface");
+        }
+        //6. Метод Remove, удаляющий из коллекции указанный элемент.
+        //   Метод должен возвращать true, если удаление прошло успешно и false в противном случае.
+        //   При удалении элементов реальная ёмкость массива не должна уменьшаться.
+
+        /// <summary>
+        /// Method, which removes first from beggining founded element at DynamicArray and returns true, if removal was successfull
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public bool Remove(T element)
+        {
+            if (_items == null)
+                //throw new NullReferenceException("No memory allocated for DynamicArray inner array");
+                return false;
+
+            if (_items.Length == 0)
+                //throw new NullReferenceException("DynamicArray inner array is empty");
+                return false;
+
+            int index = Array.IndexOf(_items, element);
+
+            if (index == -1)
+                //throw new ArgumentException("DynamicArray inner array doesn't contains provided element");
+                return false;
+
+            _items.SetValue(null, index);
+            _length--;
+            return true;
         }
         public IEnumerator<T> GetEnumerator()
         {

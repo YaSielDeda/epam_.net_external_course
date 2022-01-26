@@ -92,5 +92,51 @@ namespace DynamicClassLibraryTests
             Assert.AreEqual(daCapacityBeforeMerge + arr.Length, da.Capacity);
             Assert.AreEqual(daCapacityBeforeMerge + arr.Length, da.Length);
         }
+        [TestMethod]
+        public void Create_Char_DynamicArray_WITH_Elements_And_Remove_Existed_Element()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c' });
+
+            int expectedCapacity = da.Capacity;
+            int expectedLength = da.Length - 1;
+
+            bool isDeleted = da.Remove('a');
+
+            Assert.IsTrue(isDeleted);
+            Assert.AreEqual(da.Length, expectedLength);
+            Assert.AreEqual(da.Capacity, expectedCapacity);
+        }
+        [TestMethod]
+        public void Create_Char_DynamicArray_WITHOUT_Elements_And_Remove_Existed_Element()
+        {
+            DynamicArray<char> da = new();
+
+            bool isDeleted = da.Remove('a');
+
+            Assert.IsFalse(isDeleted);
+        }
+        [TestMethod]
+        public void Create_Char_DynamicArray_WITH_Elements_And_Remove_Inexisted_Element()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c' });
+
+            bool isDeleted = da.Remove('d');
+
+            Assert.IsFalse(isDeleted);
+        }
+        [TestMethod]
+        public void Create_Char_DynamicArray_WITH_Some_Repeating_Elements_And_Remove_Existed_Element()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c', 'b' });
+
+            int expectedCapacity = da.Capacity;
+            int expectedLength = da.Length - 1;
+
+            bool isDeleted = da.Remove('b');
+
+            Assert.IsTrue(isDeleted);
+            Assert.AreEqual(da.Length, expectedLength);
+            Assert.AreEqual(da.Capacity, expectedCapacity);
+        }
     }
 }
