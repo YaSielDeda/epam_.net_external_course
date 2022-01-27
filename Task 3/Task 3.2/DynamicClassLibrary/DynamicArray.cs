@@ -164,7 +164,7 @@ namespace DynamicClassLibrary
         /// Method, which removes first from beggining found element at DynamicArray and returns true, if removal was successfull
         /// </summary>
         /// <param name="item"></param>
-        /// <returns>bool</returns>
+        /// <returns><see cref="T:System.Boolean" /> is true, if removal was successfull</returns>
         public bool Remove(T element)
         {
             if (_items == null)
@@ -194,7 +194,7 @@ namespace DynamicClassLibrary
         /// </summary>
         /// <param name="element"></param>
         /// <param name="position"></param>
-        /// <returns>bool</returns>
+        /// <returns><see cref="T:System.Boolean" /> is true, if inserting was successfull</returns>
         /// <exception cref="ArgumentOutOfRangeException">Throws if provided position is out of DynamicArray inner array range</exception>
         public bool Insert(T element, int position)
         {
@@ -212,14 +212,19 @@ namespace DynamicClassLibrary
             return true;
         }
         //10. Методы, реализующие интерфейсы IEnumerable и IEnumerable<T>.
+
+        /// <summary>
+        /// Enumerator, which can be used for collection enumeration
+        /// </summary>
+        /// <returns>Interface <see cref="T:System.Collections.IEnumerator" /> , which can be used for collection enumeration</returns>
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Length; i++)
+            {
+                yield return _items[i];
+            }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -193,5 +193,20 @@ namespace DynamicClassLibraryTests
 
             Assert.IsTrue(isInserted);
         }
+        [TestMethod]
+        public void Create_Char_DynamicArray_With_Elements_And_Passing_Through_Each_Element_By_Foreach()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+
+            DynamicArray<char> da = new(charArr);
+
+            int count = 0;
+
+            foreach (var item in da)
+            {
+                Assert.AreEqual(item, charArr[count]);
+                count++;
+            }
+        }
     }
 }
