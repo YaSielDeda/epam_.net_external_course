@@ -1,5 +1,6 @@
 using DynamicClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace DynamicClassLibraryTests
@@ -137,6 +138,60 @@ namespace DynamicClassLibraryTests
             Assert.IsTrue(isDeleted);
             Assert.AreEqual(da.Length, expectedLength);
             Assert.AreEqual(da.Capacity, expectedCapacity);
+        }
+        [TestMethod]
+        public void Create_Empty_Char_DynamicArray_And_Insert_Element()
+        {
+            DynamicArray<char> da = new();
+
+            bool isInserted = da.Insert('b', 0);
+
+            int defaultCapacity = 8;
+            int expectedLength = 1;
+
+            Assert.IsTrue(isInserted);
+            Assert.AreEqual(defaultCapacity, da.Capacity);
+            Assert.AreEqual(expectedLength, da.Length);
+        }
+        [TestMethod]
+        public void Create_Full_Capacity_Char_DynamicArray_And_Insert_Element_At_The_3rd_Position()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' });
+
+            bool isInserted = da.Insert('z', 3);
+
+            int expectedCapacity = 16;
+            int expectedLength = 9;
+
+            Assert.IsTrue(isInserted);
+            Assert.AreEqual(expectedCapacity, da.Capacity);
+            Assert.AreEqual(expectedLength, da.Length);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Create_Char_DynamicArray_With_Elements_And_Insert_Element_At_Impossible_Position()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' });
+
+            da.Insert('z', 25);
+        }
+        [TestMethod]
+        public void Create_Full_Capacity_Char_DynamicArray_With_Elements_And_Insert_Element_At_The_Beggining()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' });
+
+            bool isInserted = da.Insert('z', 0);
+
+            Assert.IsTrue(isInserted);
+        }
+        [TestMethod]
+        public void Create_Char_DynamicArray_With_Elements_And_Insert_Element_At_The_End()
+        {
+            DynamicArray<char> da = new(new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' });
+
+            bool isInserted = da.Insert('z', da.Length);
+
+            Assert.IsTrue(isInserted);
         }
     }
 }

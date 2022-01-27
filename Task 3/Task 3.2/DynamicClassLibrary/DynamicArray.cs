@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DynamicClassLibrary
 {
@@ -10,6 +9,12 @@ namespace DynamicClassLibrary
         private T[] _items;
         private int _capacity;
         //9. Свойство Capacity — получение ёмкости: длины внутреннего массива.
+
+        /// <summary>
+        /// Property, which represents DynamicArray inner array size
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if provided value is negative</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if provided is less than Length</exception>
         public int Capacity { 
             get 
             {
@@ -34,23 +39,31 @@ namespace DynamicClassLibrary
         }
         private int _length;
         //8. Свойство Length — получение количества элементов.
-        public int Length
-        {
-            get
-            {
-                return _length;
-            }
-        }
+
+        /// <summary>
+        /// Property which represents number of not empty elements of DynamicArray inner array
+        /// </summary>
+        public int Length { get; private set; }
 
         //1. Конструктор без параметров (создаётся массив ёмкостью 8 элементов).
+
+        /// <summary>
+        /// Default constructor, which determines Capacity and Length of DynamicArray and allocates memory for inner array
+        /// </summary>
         public DynamicArray()
         {
             _capacity = 8;
-            _length = 0;
+            Length = 0;
             _items = new T[Capacity];
         }
 
         //2. Конструктор с одним целочисленным параметром (создаётся массив указанной ёмкости).
+
+        /// <summary>
+        /// Constructor, which determines Capacity by provided parameter "capacity", sets Length equal 0, and allocates memory for inner array
+        /// </summary>
+        /// <param name="capacity"></param>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if provided value is negative</exception>
         public DynamicArray(int capacity)
         {
             if (capacity < 0)
@@ -60,7 +73,7 @@ namespace DynamicClassLibrary
             else
             {
                 _capacity = capacity;
-                _length = 0;
+                Length = 0;
                 _items = new T[Capacity];
             }
         }
@@ -89,8 +102,8 @@ namespace DynamicClassLibrary
                 }
                 _items = new T[coll.Count];
                 coll.CopyTo(_items, 0);
-                _length = coll.Count;
-                _capacity = _length;
+                Length = coll.Count;
+                _capacity = Length;
                 return;
             }
             else
@@ -99,15 +112,22 @@ namespace DynamicClassLibrary
 
         //4. Метод Add, добавляющий в конец массива один элемент.
         //   При нехватке места для добавления элемента, ёмкость массива должна удваиваться
+
+        /// <summary>
+        /// Method, which adds provided element at the end of DynamicArray inner array
+        /// </summary>
+        /// <param name="element"></param>
         public void Add(T element)
         {
             if (Capacity == Length)
-            {
-                Capacity *= 2;
-            }
+                DoubleCapacity();
+
             _items[_length] = element;
-            _length++;
+            Length++;
         }
+
+        private void DoubleCapacity() => Capacity *= 2;
+
         //5. Метод AddRange, добавляющий в конец массива содержимое коллекции, реализующей интерфейс IEnumerable<T>.
         //   Обратите внимание, метод должен корректно учитывать число элементов в коллекции с тем,
         //   чтобы при необходимости расширения массива делать это только один раз вне зависимости от числа элементов в добавляемой коллекции.
@@ -130,8 +150,8 @@ namespace DynamicClassLibrary
 
                 coll.CopyTo(_items, Length);
 
-                _length = _items.Length;
-                _capacity = _length;
+                Length = _items.Length;
+                Capacity = Length;
             }
             else
                 throw new ArgumentException("Provided collection doesn't implements ICollection interface");
@@ -141,10 +161,10 @@ namespace DynamicClassLibrary
         //   При удалении элементов реальная ёмкость массива не должна уменьшаться.
 
         /// <summary>
-        /// Method, which removes first from beggining founded element at DynamicArray and returns true, if removal was successfull
+        /// Method, which removes first from beggining found element at DynamicArray and returns true, if removal was successfull
         /// </summary>
         /// <param name="item"></param>
-        /// <returns></returns>
+        /// <returns>bool</returns>
         public bool Remove(T element)
         {
             if (_items == null)
@@ -162,9 +182,36 @@ namespace DynamicClassLibrary
                 return false;
 
             _items.SetValue(null, index);
-            _length--;
+            Length--;
             return true;
         }
+        //7. Метод Insert, позволяющий добавить элемент в произвольную позицию массива (обратите внимание, может потребоваться расширить массив).
+        //   Метод должен возвращать true, если добавление прошло успешно и false в противном случае.
+        //   При выходе за границу массива должно генерироваться исключение ArgumentOutOfRangeException.
+
+        /// <summary>
+        /// Method inserts provided element at the provided position and returns true, if inserting was successfull
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="position"></param>
+        /// <returns>bool</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if provided position is out of DynamicArray inner array range</exception>
+        public bool Insert(T element, int position)
+        {
+            if (position < 0 || position > Capacity)
+                throw new ArgumentOutOfRangeException("Provided position is out of range of DynamicArray inner array");
+
+            if (Capacity == Length)
+                DoubleCapacity();
+
+            if (position < Length)
+                Array.Copy(_items, position, _items, position + 1, Length - position);
+
+            _items[position] = element;
+            Length++;
+            return true;
+        }
+        //10. Методы, реализующие интерфейсы IEnumerable и IEnumerable<T>.
         public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
