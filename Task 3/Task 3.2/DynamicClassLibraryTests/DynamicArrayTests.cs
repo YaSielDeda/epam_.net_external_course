@@ -208,5 +208,35 @@ namespace DynamicClassLibraryTests
                 count++;
             }
         }
+        [TestMethod]
+        public void Create_Full_Capacity_Char_DynamicArray_With_Elements_And_Get_Element_By_Index()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+
+            DynamicArray<char> da = new(charArr);
+
+            Assert.AreEqual(da[3], 'd');
+        }
+        [TestMethod]
+        public void Create_Full_Capacity_Char_DynamicArray_With_Elements_And_Set_Element_By_Index()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+
+            DynamicArray<char> da = new(charArr);
+
+            da[3] = 'z';
+
+            Assert.AreEqual(da[3], 'z');
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Create_Full_Capacity_Char_DynamicArray_With_Elements_And_Get_Element_By_Outbounded_Index()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+
+            DynamicArray<char> da = new(charArr);
+
+            var someChar = da[15];
+        }
     }
 }

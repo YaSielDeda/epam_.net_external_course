@@ -37,7 +37,6 @@ namespace DynamicClassLibrary
                 }
             } 
         }
-        private int _length;
         //8. Свойство Length — получение количества элементов.
 
         /// <summary>
@@ -122,7 +121,7 @@ namespace DynamicClassLibrary
             if (Capacity == Length)
                 DoubleCapacity();
 
-            _items[_length] = element;
+            _items[Length] = element;
             Length++;
         }
 
@@ -226,5 +225,32 @@ namespace DynamicClassLibrary
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        //11. Индексатор, позволяющий работать с элементом с указанным номером.
+        //    При выходе за границу массива должно генерироваться исключение ArgumentOutOfRangeException.
+
+        /// <summary>
+        /// Indexator for DynamicArray
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns>T</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Throws if provided position is out of DynamicArray inner array range</exception>
+        public T this [int index]
+        {
+            get
+            {
+                if (index < 0 || index > Length)
+                    throw new ArgumentOutOfRangeException("Provided index is out of array range");
+
+                return _items[index];
+            }
+            set
+            {
+                if (index < 0 || index > Capacity)
+                    throw new ArgumentOutOfRangeException("Provided index is out of array range");
+
+                _items[index] = value;
+            }
+        }
     }
 }
