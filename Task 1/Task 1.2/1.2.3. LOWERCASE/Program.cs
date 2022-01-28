@@ -14,8 +14,7 @@ namespace _1._2._3._LOWERCASE
 
             char[] separators = { ',', ';', ':', ' ', '.' };
 
-            string[] spliitedText = text.Split(separators, StringSplitOptions.RemoveEmptyEntries)
-                ;
+            string[] spliitedText = text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
             int numberOfLowerCaseWords = spliitedText.Where(x => x[0].ToString() == x[0].ToString().ToLower()).Count();
             Console.WriteLine(numberOfLowerCaseWords);

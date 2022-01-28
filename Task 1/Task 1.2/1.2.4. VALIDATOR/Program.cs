@@ -1,4 +1,4 @@
-﻿using Dolgov_Task_1._2;
+using Dolgov_Task_1._2;
 using System;
 using System.Linq;
 using System.Text;
@@ -17,28 +17,31 @@ namespace _1._2._4._VALIDATOR
 
             string[] arrFromText = Regex.Split(text, separators);
 
-            StringBuilder result = new StringBuilder();
-            FindFirstLetter(arrFromText, result);
+            StringBuilder result = GetEverySenteceCapitalized(arrFromText);
 
             Console.WriteLine(result.ToString());
         }
 
-        private static void FindFirstLetter(string[] arrFromText, StringBuilder result)
+        private static StringBuilder GetEverySenteceCapitalized(string[] arrFromText)
         {
+            var res = new StringBuilder();
+
             for (int i = 0; i < arrFromText.Length; i++)
             {
                 for (int j = 0; j < arrFromText[i].Length; j++)
                 {
                     if (arrFromText[i][j] != ' ')
                     {
-                        result.Append(arrFromText[i][j].ToString().ToUpper());
-                        result.Append(arrFromText[i].Substring(j + 1));
+                        res.Append(arrFromText[i][j].ToString().ToUpper());
+                        res.Append(arrFromText[i].Substring(j + 1));
                         break;
                     }
                     else
-                        result.Append(arrFromText[i][j]);
+                        res.Append(arrFromText[i][j]);
                 }
             }
+
+            return res;
         }
     }
 }
