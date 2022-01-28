@@ -299,5 +299,18 @@ namespace DynamicClassLibraryTests
 
             Assert.IsTrue(daCopy.Length > da.Length);
         }
+        [TestMethod]
+        public void Create_Char_DynamicArray_With_Elements_And_Getting_Array_By_ToArray_Method()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e' };
+
+            DynamicArray<char> da = new(charArr);
+
+            char[] copyOfInnerArray = da.ToArray();
+
+            da.Add('z');
+
+            Assert.IsTrue(da.Length > copyOfInnerArray.Length);
+        }
     }
 }

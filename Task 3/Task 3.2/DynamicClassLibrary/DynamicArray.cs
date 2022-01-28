@@ -238,7 +238,7 @@ namespace DynamicClassLibrary
         /// <summary>
         /// Creates copy of this DynamicArray
         /// </summary>
-        /// <returns><see cref="T:DynamicClassLibrary.DynamicArray<T>" /></returns>
+        /// <returns><see cref="DynamicClassLibrary.DynamicArray<T>" /></returns>
         public object Clone() => MemberwiseClone();
 
         //11. Индексатор, позволяющий работать с элементом с указанным номером.
@@ -274,6 +274,20 @@ namespace DynamicClassLibrary
                 else
                     _items[^Math.Abs(index)] = value;
             }
+        }
+
+        //*4. Добавить метод ToArray, возвращающий новый массив (обычный),
+        //    содержащий все содержащиеся в текущем динамическом массиве объекты.
+
+        /// <summary>
+        /// Returns copy of DynamicArray inner array
+        /// </summary>
+        /// <returns><see cref="System.Array" /></returns>
+        public T[] ToArray()
+        {
+            T[] arr = new T[Length];
+            Array.Copy(_items, arr, Length);
+            return arr;
         }
     }
 }
