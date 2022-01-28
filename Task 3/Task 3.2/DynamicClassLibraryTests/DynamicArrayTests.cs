@@ -271,5 +271,33 @@ namespace DynamicClassLibraryTests
 
             Assert.AreEqual(capacityToChange, da.Capacity);
         }
+        [TestMethod]
+        public void Create_Char_DynamicArray_With_Elements_And_Clone_It()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e' };
+
+            DynamicArray<char> da = new(charArr);
+
+            DynamicArray<char> daCopy = da.Clone() as DynamicArray<char>;
+
+            for (int i = 0; i < da.Length; i++)
+                Assert.AreEqual(da[i], daCopy[i]);
+
+            Assert.AreEqual(da.Length, daCopy.Length);
+            Assert.AreEqual(da.Capacity, daCopy.Capacity);
+        }
+        [TestMethod]
+        public void Create_Char_DynamicArray_With_Elements_Clone_It_And_Change()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e' };
+
+            DynamicArray<char> da = new(charArr);
+
+            DynamicArray<char> daCopy = da.Clone() as DynamicArray<char>;
+
+            daCopy.Add('z');
+
+            Assert.IsTrue(daCopy.Length > da.Length);
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DynamicClassLibrary
 {
-    public class DynamicArray<T> : IEnumerable, IEnumerable<T>
+    public class DynamicArray<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
         private T[] _items;
         private int _capacity;
@@ -233,9 +233,17 @@ namespace DynamicClassLibrary
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        //*3. Реализовать интерфейс ICloneable для создания копии массива.
+
+        /// <summary>
+        /// Creates copy of this DynamicArray
+        /// </summary>
+        /// <returns><see cref="T:DynamicClassLibrary.DynamicArray<T>" /></returns>
+        public object Clone() => MemberwiseClone();
+
         //11. Индексатор, позволяющий работать с элементом с указанным номером.
         //    При выходе за границу массива должно генерироваться исключение ArgumentOutOfRangeException.
-        
+
         //*1. Доступ к элементам с конца при использовании отрицательного индекса (−1: последний, −2: предпоследний и т.д.).
 
         /// <summary>
