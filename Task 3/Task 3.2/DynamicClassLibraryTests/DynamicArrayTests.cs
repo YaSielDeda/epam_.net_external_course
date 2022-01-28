@@ -258,5 +258,18 @@ namespace DynamicClassLibraryTests
 
             Assert.AreEqual(da[-5], 'z');
         }
+        [TestMethod]
+        public void Create_Full_Capacity_Char_DynamicArray_With_Elements_And_Decrease_Capacity()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+
+            DynamicArray<char> da = new(charArr);
+
+            int capacityToChange = 2;
+
+            da.Capacity = capacityToChange;
+
+            Assert.AreEqual(capacityToChange, da.Capacity);
+        }
     }
 }

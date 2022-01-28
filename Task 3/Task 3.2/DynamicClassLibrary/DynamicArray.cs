@@ -28,12 +28,16 @@ namespace DynamicClassLibrary
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("Capacity can't be negative");
 
-                if (value < Length)
-                    throw new ArgumentOutOfRangeException("Capacity can't be less than length, data loss will follow");
-
                 if (_capacity != value)
                 {
                     T[] destinationArray = new T[value];
+
+                    if (value < Length)
+                    {
+                        Array.Copy(_items, 0, _items, 0, value);
+                        Length = value;
+                    }
+
                     Array.Copy(_items, 0, destinationArray, 0, Length);
                     _items = destinationArray;
                     _capacity = value;
