@@ -10,6 +10,9 @@ namespace DynamicClassLibrary
         private int _capacity;
         //9. Свойство Capacity — получение ёмкости: длины внутреннего массива.
 
+        //*2. Возможность ручного изменения значения Capacity с
+        //    сохранением уцелевших данных (данные за пределами новой Capacity сохранять не нужно).
+
         /// <summary>
         /// Property, which represents DynamicArray inner array size
         /// </summary>
@@ -228,6 +231,8 @@ namespace DynamicClassLibrary
 
         //11. Индексатор, позволяющий работать с элементом с указанным номером.
         //    При выходе за границу массива должно генерироваться исключение ArgumentOutOfRangeException.
+        
+        //*1. Доступ к элементам с конца при использовании отрицательного индекса (−1: последний, −2: предпоследний и т.д.).
 
         /// <summary>
         /// Indexator for DynamicArray
@@ -239,17 +244,23 @@ namespace DynamicClassLibrary
         {
             get
             {
-                if (index < 0 || index > Length)
+                if (Math.Abs(index) > Length)
                     throw new ArgumentOutOfRangeException("Provided index is out of array range");
 
-                return _items[index];
+                if (index >= 0)
+                    return _items[index];
+                else
+                    return _items[^Math.Abs(index)];
             }
             set
             {
-                if (index < 0 || index > Capacity)
+                if (Math.Abs(index) > Length)
                     throw new ArgumentOutOfRangeException("Provided index is out of array range");
 
-                _items[index] = value;
+                if (index >= 0)
+                    _items[index] = value;
+                else
+                    _items[^Math.Abs(index)] = value;
             }
         }
     }

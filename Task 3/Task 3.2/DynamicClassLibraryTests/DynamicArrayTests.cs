@@ -238,5 +238,25 @@ namespace DynamicClassLibraryTests
 
             var someChar = da[15];
         }
+        [TestMethod]
+        public void Create_Full_Capacity_Char_DynamicArray_With_Elements_And_Get_Penultimate_Element()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+
+            DynamicArray<char> da = new(charArr);
+
+            Assert.AreEqual(da[-2], 'g');
+        }
+        [TestMethod]
+        public void Create_Full_Capacity_Char_DynamicArray_With_Elements_And_Set_Some_Element_With_Negative_Index()
+        {
+            char[] charArr = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+
+            DynamicArray<char> da = new(charArr);
+
+            da[-5] = 'z';
+
+            Assert.AreEqual(da[-5], 'z');
+        }
     }
 }
