@@ -6,7 +6,7 @@ namespace DynamicClassLibrary
 {
     public class DynamicArray<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
-        private T[] _items;
+        protected T[] _items;
         private int _capacity;
         //9. Свойство Capacity — получение ёмкости: длины внутреннего массива.
 
@@ -223,7 +223,7 @@ namespace DynamicClassLibrary
         /// Enumerator, which can be used for collection enumeration
         /// </summary>
         /// <returns>Interface <see cref="T:System.Collections.IEnumerator" /> , which can be used for collection enumeration</returns>
-        public IEnumerator<T> GetEnumerator()
+        public virtual IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < Length; i++)
             {
