@@ -1,4 +1,4 @@
-﻿using Dolgov_Task_1._2;
+using Dolgov_Task_1._2;
 using System;
 using System.IO;
 using System.Linq;
