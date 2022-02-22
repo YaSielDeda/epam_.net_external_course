@@ -6,4 +6,8 @@
     <RootNamespace>_4._1._1_FILE_MANAGEMENT_SYSTEM</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
 </Project>

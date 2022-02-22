@@ -13,14 +13,17 @@ namespace _4._1._1_FILE_MANAGEMENT_SYSTEM
 
             string pathToLogFile = Environment.CurrentDirectory + @"\Logger.txt";
 
-            if (mode == ModeType.Watch)
+            string pathToRollbackFile = Environment.CurrentDirectory + @"\Versions.txt";
+
+            if (mode == ModeType.Listen)
             {
                 try
                 {
-                    FileWatcher.Init(pathToFolder, pathToLogFile);
+                    FileListener.Init(pathToFolder, pathToLogFile);
+                    VersionHandler.Init(pathToRollbackFile, pathToFolder);
 
                     TypeConsoleColoredMessage("Listening directory...", ConsoleColor.Green);
-                    Console.WriteLine("Press any key to close programm.");
+                    Console.WriteLine("Press enter to close programm.");
                     Console.ReadLine();
                 }
                 catch (Exception ex)
@@ -30,22 +33,65 @@ namespace _4._1._1_FILE_MANAGEMENT_SYSTEM
             }
             else if (mode == ModeType.Rollback)
             {
+                VersionHandler.Init(pathToRollbackFile, pathToFolder);
 
+                var dates = VersionHandler.GetAvailableRollbackDates();
+
+                int number = ChooseNumberOfDates(dates);
+
+                try
+                {
+                    VersionHandler.RollbackChanges(dates[number]);
+                    TypeConsoleColoredMessage("Files is successfully restored", ConsoleColor.Green);
+                }
+                catch (Exception ex)
+                {
+                    TypeConsoleColoredMessage(ex.Message, ConsoleColor.Green);
+                }
             }
+        }
+
+        private static int ChooseNumberOfDates(DateTime[] dates)
+        {
+            Console.WriteLine("Choose number of date to rollback");
+            for (int i = 1; i <= dates.Length; i++)
+            {
+                Console.WriteLine($"{i - 1} {dates[i - 1]}");
+            }
+
+            int number;
+            bool exit;
+
+            do
+            {
+                int.TryParse(Console.ReadLine(), out number);
+
+                if (number >= 1 && number <= dates.Length)
+                {
+                    exit = true;
+                }
+                else
+                {
+                    TypeConsoleColoredMessage($"Enter number from 1 to {dates.Length - 1}", ConsoleColor.Red);
+                    exit = false;
+                }
+
+            } while (!exit);
+            return number;
         }
 
         private static ModeType ChooseMode()
         {
             do
             {
-                Console.WriteLine($"Mode: {Environment.NewLine}1. Watch {Environment.NewLine}2. Rollback");
+                Console.WriteLine($"Mode: {Environment.NewLine}1. Listen {Environment.NewLine}2. Rollback");
 
                 if (int.TryParse(Console.ReadLine(), out int mode) && mode == 1 || mode == 2)
                 {
                     switch (mode)
                     {
                         case 1:
-                            return ModeType.Watch;
+                            return ModeType.Listen;
                         case 2:
                             return ModeType.Rollback;
                         default:

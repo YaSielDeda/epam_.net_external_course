@@ -10,7 +10,7 @@ namespace _4._1._1_FILE_MANAGEMENT_SYSTEM
     public enum ModeType
     {
         None = 0,
-        Watch = 1,
+        Listen = 1,
         Rollback = 2
     }
 }
