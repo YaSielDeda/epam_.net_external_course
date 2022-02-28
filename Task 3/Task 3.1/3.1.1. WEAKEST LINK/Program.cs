@@ -8,37 +8,57 @@ namespace _3._1._1._WEAKEST_LINK
     {
         static void Main()
         {
-            Logger.InitializeConsoleLogger();
+            bool isValidationCorrect = false;
 
-            Log.Information("Input N: ");
-            int.TryParse(Console.ReadLine(), out int N);
+            int N = 0;
+            int removableNumber = 0;
 
-            Log.Information("Enter which person number will be removed at every lap: ");
-            int.TryParse(Console.ReadLine(), out int removableNumber);
-
-            try
+            do
             {
-                if (N == 0 || removableNumber == 0)
-                    throw new ArgumentException("You have entered invalid data!");
+                Console.Write($"Input N: ");
+                N = InputValidation();
+
+                Console.Write($"Input removable number: ");
+                removableNumber = InputValidation();
 
                 if (removableNumber > N)
-                    throw new ArgumentException("Removable number can't be more than N!");
-
-                int count = 1;
-
-                while (N >= removableNumber - 1)
                 {
-                    Log.Information($"Round {count}. Man is removed, {N} remaining");
-                    N--;
-                    count++;
+                    Console.WriteLine("Removable number can't be more than N!");
+                }
+                else
+                {
+                    isValidationCorrect = true;
                 }
 
-                Log.Information("Game over. Impossible to remove more.");
-            }
-            catch (Exception ex)
+            } while (!isValidationCorrect);
+
+            int count = 1;
+
+            while (N >= removableNumber - 1)
             {
-                Log.Fatal(messageTemplate: ex.Message);
+                Console.WriteLine($"Round {count}. Man is removed, {N} remaining");
+                N--;
+                count++;
             }
+
+            Console.WriteLine("Game over. Impossible to remove more.");
+        }
+
+        private static int InputValidation()
+        {
+            bool isValid = false;
+            int number = 0;
+
+            do
+            {
+                isValid = int.TryParse(Console.ReadLine(), out number) && number != 0;
+
+                if (!isValid)
+                    Console.WriteLine("You have entered invalid data!");
+
+            } while (!isValid);
+
+            return number;
         }
     }
 }
