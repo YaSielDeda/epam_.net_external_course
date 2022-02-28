@@ -4,51 +4,51 @@ using System.Linq;
 
 namespace _3._3._1._SUPER_ARRAY
 {
-    public class ArrayMethods
+    public static class ArrayOfNumbersExtensions
     {
-        public static void Transform(byte[] arr, Func<byte, byte> action)
+        public static void Transform(this byte[] arr, Func<byte, byte> action)
         {
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = action.Invoke(arr[i]);
             }
         }
-        public static void Transform(short[] arr, Func<short, short> action)
+        public static void Transform(this short[] arr, Func<short, short> action)
         {
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = action.Invoke(arr[i]);
             }
         }
-        public static void Transform(int[] arr, Func<int, int> action)
+        public static void Transform(this int[] arr, Func<int, int> action)
         {
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = action.Invoke(arr[i]);
             }
         }
-        public static void Transform(long[] arr, Func<long, long> action)
+        public static void Transform(this long[] arr, Func<long, long> action)
         {
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = action.Invoke(arr[i]);
             }
         }
-        public static void Transform(float[] arr, Func<float, float> action)
+        public static void Transform(this float[] arr, Func<float, float> action)
         {
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = action.Invoke(arr[i]);
             }
         }
-        public static void Transform(double[] arr, Func<double, double> action)
+        public static void Transform(this double[] arr, Func<double, double> action)
         {
             for (int i = 0; i < arr.Length; i++)
             {
                 arr[i] = action.Invoke(arr[i]);
             }
         }
-        public static void Transform(decimal[] arr, Func<decimal, decimal> action)
+        public static void Transform(this decimal[] arr, Func<decimal, decimal> action)
         {
             for (int i = 0; i < arr.Length; i++)
             {
@@ -56,7 +56,7 @@ namespace _3._3._1._SUPER_ARRAY
             }
         }
 
-        public static byte SumAllElements(byte[] arr)
+        public static byte SumAllElements(this byte[] arr)
         {
             byte count = 0;
 
@@ -67,7 +67,7 @@ namespace _3._3._1._SUPER_ARRAY
 
             return count;
         }
-        public static short SumAllElements(short[] arr) 
+        public static short SumAllElements(this short[] arr) 
         {
             short count = 0;
 
@@ -78,52 +78,52 @@ namespace _3._3._1._SUPER_ARRAY
 
             return count;
         }
-        public static int SumAllElements(int[] arr) => arr.Sum();
-        public static long SumAllElements(long[] arr) => arr.Sum();
-        public static float SumAllElements(float[] arr) => arr.Sum();
-        public static double SumAllElements(double[] arr) => arr.Sum();
-        public static decimal SumAllElements(decimal[] arr) => arr.Sum();
+        public static int SumAllElements(this int[] arr) => arr.Sum();
+        public static long SumAllElements(this long[] arr) => arr.Sum();
+        public static float SumAllElements(this float[] arr) => arr.Sum();
+        public static double SumAllElements(this double[] arr) => arr.Sum();
+        public static decimal SumAllElements(this decimal[] arr) => arr.Sum();
 
 
-        public static double ArrayAverage(byte[] arr) => SumAllElements(arr) / arr.Length;
-        public static double ArrayAverage(short[] arr) => SumAllElements(arr) / arr.Length;
-        public static double ArrayAverage(int[] arr) => arr.Average();
-        public static double ArrayAverage(long[] arr) => arr.Average();
-        public static double ArrayAverage(float[] arr) => arr.Average();
-        public static double ArrayAverage(double[] arr) => arr.Average();
-        public static decimal ArrayAverage(decimal[] arr) => arr.Average();
+        public static double ArrayAverage(this byte[] arr) => SumAllElements(arr) / arr.Length;
+        public static double ArrayAverage(this short[] arr) => SumAllElements(arr) / arr.Length;
+        public static double ArrayAverage(this int[] arr) => arr.Average();
+        public static double ArrayAverage(this long[] arr) => arr.Average();
+        public static double ArrayAverage(this float[] arr) => arr.Average();
+        public static double ArrayAverage(this double[] arr) => arr.Average();
+        public static decimal ArrayAverage(this decimal[] arr) => arr.Average();
 
-        public static int FrequentlyValue(byte[] arr) =>
+        public static int FrequentlyValue(this byte[] arr) =>
             arr.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .First()
             .Key;
-        public static short FrequentlyValue(short[] arr) =>
+        public static short FrequentlyValue(this short[] arr) =>
             arr.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .First()
             .Key;
-        public static int FrequentlyValue(int[] arr) =>
+        public static int FrequentlyValue(this int[] arr) =>
             arr.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .First()
             .Key;
-        public static long FrequentlyValue(long[] arr) =>
+        public static long FrequentlyValue(this long[] arr) =>
             arr.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .First()
             .Key;
-        public static float FrequentlyValue(float[] arr) =>
+        public static float FrequentlyValue(this float[] arr) =>
             arr.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .First()
             .Key;
-        public static double FrequentlyValue(double[] arr) =>
+        public static double FrequentlyValue(this double[] arr) =>
             arr.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .First()
             .Key;
-        public static decimal FrequentlyValue(decimal[] arr) =>
+        public static decimal FrequentlyValue(this decimal[] arr) =>
             arr.GroupBy(x => x)
             .OrderByDescending(x => x.Count())
             .First()
