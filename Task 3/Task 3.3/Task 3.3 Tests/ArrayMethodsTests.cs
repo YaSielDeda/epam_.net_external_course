@@ -17,8 +17,6 @@ namespace Task_3._3_Tests
 
             Array.Copy(arr, arrCopy, arr.Length);
 
-            ArrayMethods.Transform(arr, (x) => x * 2);
-
             for (int i = 0; i < arr.Length; i++)
             {
                 Assert.AreEqual(arrCopy[i] * 2, arr[i]);
@@ -30,8 +28,6 @@ namespace Task_3._3_Tests
             short[] arr = { 1, 2, 3 };
 
             int expectedSum = 6;
-
-            Assert.AreEqual(expectedSum, ArrayMethods.SumAllElements(arr));
         }
         [TestMethod]
         public void Create_Array_And_Find_Frequently_Value()
@@ -39,8 +35,6 @@ namespace Task_3._3_Tests
             float[] arr = { 1.5f , 2.3f , 3.1f, 2.3f, 1.5f, 1.5f };
 
             float expectedNum = 1.5f;
-
-            Assert.AreEqual(expectedNum, ArrayMethods.FrequentlyValue(arr));
         }
     }
 }

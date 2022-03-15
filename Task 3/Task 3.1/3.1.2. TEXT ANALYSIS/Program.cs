@@ -10,47 +10,60 @@ namespace _3._1._2._TEXT_ANALYSIS
     {
         static void Main(string[] args)
         {
-            Logger.InitializeConsoleLogger();
 
-            Log.Information("Input text and then press Enter:");
+            Console.WriteLine("Input text and then press Enter:");
 
             try
             {
                 char[] separators = { ',', ';', ':', ' ', '.', '-', '!', '?', '(', ')', '\\', '/' };
-                List<string> arr = new(Console.ReadLine().ToLower().Trim().Split(separators, StringSplitOptions.RemoveEmptyEntries));
 
-                if (arr.Count == 0)
-                    throw new ArgumentNullException();
+                bool isValid = false;
+                List<string> arr;
 
-                List<KeyValuePair<int, string>> keyWordValueTimes = new();
+                do
+                {
+                    arr = new(Console.ReadLine().ToLower().Trim().Split(separators, StringSplitOptions.RemoveEmptyEntries));
+
+                    if (arr.Count == 0)
+                    {
+                        Console.WriteLine("You need to type some words");
+                    }
+                    else
+                    {
+                        isValid = true;
+                    }
+
+                } while (!isValid);
+
+                Dictionary<string, int> WordCount = new();
 
                 foreach (var word in arr.Distinct())
-                    keyWordValueTimes.Add(new KeyValuePair<int, string>(arr.Where(x => x == word).Count(), word));
+                    WordCount.Add(word, arr.Where(x => x == word).Count());
 
-                var sortedDictionary = from entry in keyWordValueTimes 
-                                       orderby entry.Key descending select entry;
+                var sortedDictionary = from entry in WordCount 
+                                       orderby entry.Value descending select entry;
 
                 bool hasManyRecurringWords = false;
 
                 foreach (var pair in sortedDictionary)
                 {
-                    if (pair.Key >= 4)
+                    if (pair.Value >= 4)
                     {
-                        Log.Warning($"{pair.Key} times - {pair.Value}");
+                        Console.WriteLine($"{pair.Key} - {pair.Value} times");
                         hasManyRecurringWords = true;
                     }
                     else
-                        Log.Information($"{pair.Key} times - {pair.Value}");
+                        Console.WriteLine($"{pair.Key} - {pair.Value} times");
                 }
 
                 if(hasManyRecurringWords)
-                    Log.Information("Not bad, but better try to replace some of recurring words with synonims");
+                    Console.WriteLine("Not bad, but better try to replace some of recurring words with synonims");
                 else
-                    Log.Information($"Nice, your text looks clean from recurring words!");
+                    Console.WriteLine($"Nice, your text looks clean from recurring words!");
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message);
+                Console.WriteLine(ex.Message);
             }   
         }
     }
