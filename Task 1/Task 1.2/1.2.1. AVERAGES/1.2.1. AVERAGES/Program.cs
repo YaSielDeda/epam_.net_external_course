@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using Dolgov_Task_1._2;
+=======
+using Dolgov_Task_1._2;
+>>>>>>> 2d477b0f2039bdddd44ff518098e200d180c8673
 using System;
 using System.IO;
 using System.Linq;
@@ -27,4 +31,8 @@ namespace _1._2._1._AVERAGES
             Console.WriteLine(average);
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2d477b0f2039bdddd44ff518098e200d180c8673

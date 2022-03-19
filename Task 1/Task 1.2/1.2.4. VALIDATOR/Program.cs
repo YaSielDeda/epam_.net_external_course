@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using Dolgov_Task_1._2;
+=======
+using Dolgov_Task_1._2;
+>>>>>>> 2d477b0f2039bdddd44ff518098e200d180c8673
 using System;
 using System.Linq;
 using System.Text;
@@ -44,4 +48,8 @@ namespace _1._2._4._VALIDATOR
             return res;
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 2d477b0f2039bdddd44ff518098e200d180c8673
