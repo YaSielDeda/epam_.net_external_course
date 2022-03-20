@@ -10,6 +10,7 @@ namespace _3._1._2._TEXT_ANALYSIS
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Input text and then press Enter:");
 
             try
