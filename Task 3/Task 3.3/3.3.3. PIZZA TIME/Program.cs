@@ -1,7 +1,5 @@
 ﻿using _3._3._3._PIZZA_TIME.Entities;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace _3._3._3._PIZZA_TIME
 {
