@@ -1,0 +1,17 @@
+li {
+    list-style-type: none;
+}
+ul {
+    margin: 10px 10px;
+    padding-left: 0;
+}
+.block1 {
+    width: 200px; 
+    background: rgb(250, 227, 136);
+    color: brown;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    box-shadow: 10px 5px 0px brown;
+}

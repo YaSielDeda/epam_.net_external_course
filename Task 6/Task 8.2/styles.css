@@ -1,0 +1,51 @@
+div{
+    background-color:#0690cf;
+    color:white;
+    height:inherit;
+    width:300px;
+    position:fixed;
+    border:3px solid #0075b2;
+    padding-top:15px;
+    padding-bottom:15px;
+    font-family: Arial;
+}
+hr{
+  border:none;
+  background:white;
+  height:1px;
+  margin-bottom:25px;
+}
+p{
+  margin-bottom:1px;
+  margin-top:1px;
+  border-color:white;
+  margin-left:15px;
+}
+
+#email{
+  width:250px;
+  border-color:white;
+  border-width:1px;
+  margin-bottom:20px;
+}
+#password, #again{
+  width:115px;
+  border-color:white;
+  border-width:1px;
+  margin-bottom:25px;
+}
+#again{
+  margin-left:10px;
+}
+#send{
+  background:#ffdf7f;
+  border:none;
+  color:black !important;
+  height:25px;
+}
+#registry{
+    font-size:25px;
+}
+#pass{
+    margin-left:75px
+}
