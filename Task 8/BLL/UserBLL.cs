@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Task_8._1_THREE_LAYER.DAL;
-using Task_8._1_THREE_LAYER.Entities;
+using Entities;
 
 namespace BLL
 {

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwardJSON_DAO.cs" />
     <Compile Include="IDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserJSON_DAO.cs" />
@@ -55,10 +56,6 @@
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{DB6836E2-F3CF-476E-82EA-37EB30EECF0B}</Project>
       <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Task 8.1_THREE-LAYER\Task 8.1_THREE-LAYER.csproj">
-      <Project>{B857544B-365F-4219-8C41-1EBB13679652}</Project>
-      <Name>Task 8.1_THREE-LAYER</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Task_8._1_THREE_LAYER.Entities
+namespace Entities
 {
     public class User
     {

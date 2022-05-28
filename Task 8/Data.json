@@ -1,0 +1,46 @@
+{
+	"Users":
+	[
+		{
+			"Id":"f6b06896-3b7c-4fc5-91d3-2360c4fbe70d",
+			"Name":"Vasya",
+			"DateOfBirth":"1998-04-24T00:00:00",
+			"Age":24,
+			"AwardIDs":
+			[
+				"b9f857bb-8a54-41f9-a3b3-4829ef2feb09"
+			]
+		},
+		{
+			"Id":"9ad3569f-21f7-4ed1-997e-e7c07f9cbff4",
+			"Name":"Petya",
+			"DateOfBirth":"2000-05-12T00:00:00",
+			"Age":22,
+			"AwardIDs":
+			[
+				"b9f857bb-8a54-41f9-a3b3-4829ef2feb09",
+				"9e768540-3a91-43d4-a56f-a6d5c68e97bb"
+			]
+		}
+	],
+	"Awards":
+	[
+		{
+			"Id":"b9f857bb-8a54-41f9-a3b3-4829ef2feb09",
+			"Title":"Binary search expert",
+			"UserIDs":
+			[
+				"f6b06896-3b7c-4fc5-91d3-2360c4fbe70d",
+				"9ad3569f-21f7-4ed1-997e-e7c07f9cbff4"
+			]
+		},
+		{
+			"Id":"9e768540-3a91-43d4-a56f-a6d5c68e97bb",
+			"Title":"Dynamic programming expert",
+			"UserIDs":
+			[
+				"9ad3569f-21f7-4ed1-997e-e7c07f9cbff4"
+			]
+		}
+	]
+}

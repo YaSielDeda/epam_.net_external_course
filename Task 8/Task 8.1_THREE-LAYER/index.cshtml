@@ -1,7 +1,32 @@
 ﻿@{
     Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
-
-    bool showNotification = false;
 }
 
-<button onclick="btnLogin_Click" type="button" class="btn btn-primary">submit</button>
+<button id="UsersList" type="button" class="btn btn-primary btn-lg btn-block">Users list</button>
+<button id="UsersOperations" type="button" class="btn btn-secondary btn-lg btn-block">Users operations</button>
+<button id="AwardsList" type="button" class="btn btn-primary btn-lg btn-block">Awards list</button>
+<button id="AwardsOperations" type="button" class="btn btn-secondary btn-lg btn-block">Awards operations</button>
+
+<script>
+    $('#UsersList').click(function () {
+        location.href = "/Pages/UsersList.aspx";
+    });
+</script>
+
+<script>
+    $('#UsersOperations').click(function () {
+        location.href = "/Pages/UsersOperations";
+    });
+</script>
+
+<script>
+    $('#AwardsList').click(function () {
+        location.href = "/Pages/AwardsList.aspx";
+    });
+</script>
+
+<script>
+    $('#AwardsOperations').click(function () {
+        location.href = "/Pages/AwardsOperations";
+    });
+</script>

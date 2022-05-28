@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Task_8._1_THREE_LAYER.Entities
+namespace Entities
 {
     public class Award
     {
@@ -15,6 +15,12 @@ namespace Task_8._1_THREE_LAYER.Entities
             Id = Guid.NewGuid();
             Title = title;
             UserIDs = new List<Guid>();
+        }
+
+        public override string ToString()
+        {
+            return  $"ID:\t {Id}\n" +
+                    $"Title:\t {Title}\n";
         }
     }
 }
