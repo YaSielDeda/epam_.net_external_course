@@ -22,14 +22,21 @@ namespace DAL
             var i = _jsonDto.Awards.FindIndex(x => x.Id == id);
 
             _jsonDto.Awards.RemoveAt(i);
+
+            WriteAllChanges();
         }
         public Award GetById(Guid id) => _jsonDto.Awards.Where(x => x.Id == id).FirstOrDefault();
         public List<Award> GetAll() => _jsonDto.Awards;
-        public void Create(Award Award) => _jsonDto.Awards.Add(Award);
+        public void Create(Award Award)
+        {
+            _jsonDto.Awards.Add(Award);
+
+            WriteAllChanges();
+        }
         public void WriteAllChanges()
         {
             string json = JsonConvert.SerializeObject(_jsonDto);
-            File.AppendAllText(_path, json);
+            File.WriteAllText(_path, json);
         }
         public void Update(Award Award)
         {
@@ -38,6 +45,8 @@ namespace DAL
             if (Award != null)
             {
                 _jsonDto.Awards[i] = Award;
+
+                WriteAllChanges();
             }
         }
     }

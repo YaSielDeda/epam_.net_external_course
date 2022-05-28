@@ -11,10 +11,12 @@ namespace Entities
     {
         public List<User> Users;
         public List<Award> Awards;
-        public JSON_DTO(List<User> users, List<Award> awards)
+        public List<AwardUser> AwardIDUserID;
+        public JSON_DTO(List<User> users, List<Award> awards, List<AwardUser> AwardIDUserID)
         {
             Users = users;
             Awards = awards;
+            this.AwardIDUserID = AwardIDUserID;
         }
         public JSON_DTO()
         {

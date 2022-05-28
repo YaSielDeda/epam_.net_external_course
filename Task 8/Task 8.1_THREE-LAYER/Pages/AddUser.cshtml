@@ -1,0 +1,62 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
+
+    bool success = false;
+    string error = null;
+
+    if (IsPost)
+    {
+        IBLL<User> bll = new UserBLL();
+
+        try
+        {
+            //yyyy-mm-dd
+            var date = Request["dateOfBirth"].Split('-');
+
+            int.TryParse(date[0], out int year);
+            int.TryParse(date[1], out int month);
+            int.TryParse(date[2], out int day);
+
+            var user = new User(Request["userName"], new DateTime(year, month, day));
+
+            bll.Create(user);
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+}
+
+@if (IsPost)
+{
+    if (success)
+    {
+        <div class="alert alert-success" role="alert">
+            User was added!
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @error
+        </div>
+    }
+}
+
+<h1> Add new user</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="inputName">Name</label>
+        <input name="userName" type="text" class="form-control" id="name" placeholder="Ivan Ivanovich Ivanov">
+    </div>
+    <div class="form-group">
+        <label for="inputDate">Date fo birth</label>
+        <input name="dateOfBirth" type="date" class="form-control" id="date" placeholder="MMddYYYY">
+    </div>
+    <button id="newUser" type="submit" class="btn btn-primary">Submit</button>
+</form>

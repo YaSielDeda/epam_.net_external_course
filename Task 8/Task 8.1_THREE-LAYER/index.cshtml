@@ -2,10 +2,11 @@
     Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
 }
 
-<button id="UsersList" type="button" class="btn btn-primary btn-lg btn-block">Users list</button>
-<button id="UsersOperations" type="button" class="btn btn-secondary btn-lg btn-block">Users operations</button>
-<button id="AwardsList" type="button" class="btn btn-primary btn-lg btn-block">Awards list</button>
-<button id="AwardsOperations" type="button" class="btn btn-secondary btn-lg btn-block">Awards operations</button>
+<table>
+    <tr><td><button id="UsersList" type="button" class="btn btn-primary btn-lg btn-block">Users list</button></td> <td><button id="AwardsList" type="button" class="btn btn-primary btn-lg btn-block">Awards list</button></td></tr>
+    <tr><td><button id="AddUser" type="button" class="btn btn-secondary btn-lg btn-block">Add user</button></td> <td><button id="AddAward" type="button" class="btn btn-secondary btn-lg btn-block">Add award</button></td></tr>
+    <tr><td><button id="DelUser" type="button" class="btn btn-secondary btn-lg btn-block">Delete user</button></td> <td><button id="DelAward" type="button" class="btn btn-secondary btn-lg btn-block">Delete award</button></td></tr>
+</table>
 
 <script>
     $('#UsersList').click(function () {
@@ -14,8 +15,14 @@
 </script>
 
 <script>
-    $('#UsersOperations').click(function () {
-        location.href = "/Pages/UsersOperations";
+    $('#AddUser').click(function () {
+        location.href = "/Pages/AddUser";
+    });
+</script>
+
+<script>
+    $('#DelUser').click(function () {
+        location.href = "/Pages/DelUser";
     });
 </script>
 
@@ -26,7 +33,13 @@
 </script>
 
 <script>
-    $('#AwardsOperations').click(function () {
-        location.href = "/Pages/AwardsOperations";
+    $('#AddAward').click(function () {
+        location.href = "/Pages/AddAward";
+    });
+</script>
+
+<script>
+    $('#DelAward').click(function () {
+        location.href = "/Pages/DelAward";
     });
 </script>

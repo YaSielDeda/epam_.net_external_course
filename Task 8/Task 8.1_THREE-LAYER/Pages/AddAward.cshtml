@@ -1,0 +1,49 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
+
+    bool success = false;
+    string error = null;
+
+    if (IsPost)
+    {
+        IBLL<Award> bll = new AwardBLL();
+
+        try
+        {
+            bll.Create(new Award(Request["title"]));
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+}
+
+@if (IsPost)
+{
+    if (success)
+    {
+        <div class="alert alert-success" role="alert">
+            New award was added!
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @error
+        </div>
+    }
+}
+
+<h1> Add new award</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="inputTitle">Title</label>
+        <input name="title" type="text" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

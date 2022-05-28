@@ -11,14 +11,15 @@ namespace Entities
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Age { get; set; }
-        public List<Guid> AwardIDs { get; set; }
         public User(string name, DateTime dateTime)
         {
+            if (dateTime > DateTime.Now)
+                throw new Exception("Are you from future?");
+
             Id = Guid.NewGuid();
             Name = name;
             DateOfBirth = dateTime;
             Age = DateTime.Now.Year - DateOfBirth.Year;
-            AwardIDs = new List<Guid>();
         }
         public User()
         {

@@ -8,6 +8,7 @@ namespace Entities
 {
     public class AwardUser
     {
+        public Guid Id { get; set; }
         public Guid UserID { get; set; }
         public Guid AwardID { get; set; }
         public AwardUser()
