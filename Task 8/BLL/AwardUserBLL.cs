@@ -27,5 +27,10 @@ namespace BLL
         }
 
         public List<AwardUser> GetAll() => _awardUserDAO.GetAll();
+        //TODO
+        public AwardUser GetByID(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

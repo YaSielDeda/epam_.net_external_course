@@ -11,7 +11,7 @@ namespace Task_8._1_THREE_LAYER.DAL
     public class UserJSON_DAO : IDAO<User>
     {
         private string _path = @"C:\Users\bereg\Documents\epam\Task 8\Data.json";
-        JSON_DTO _jsonDto;
+        private JSON_DTO _jsonDto;
         public UserJSON_DAO()
         {
             string json = File.ReadAllText(_path);
@@ -19,13 +19,13 @@ namespace Task_8._1_THREE_LAYER.DAL
         }
         public void DeleteByID(Guid id)
         {
-            var i = _jsonDto.Users.FindIndex(x => x.Id == id);
+            var i = GetByID(id);
 
-            _jsonDto.Users.RemoveAt(i);
+            _jsonDto.Users.Remove(i);
 
             WriteAllChanges();
         }
-        public User GetById(Guid id) => _jsonDto.Users.Where(x => x.Id == id).FirstOrDefault();
+        public User GetByID(Guid id) => _jsonDto.Users.Where(x => x.Id == id).FirstOrDefault();
         public List<User> GetAll() => _jsonDto.Users;
         public void Create(User user)
         {

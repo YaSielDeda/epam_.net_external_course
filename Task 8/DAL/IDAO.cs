@@ -12,5 +12,6 @@ namespace Task_8._1_THREE_LAYER.DAL
         void DeleteByID(Guid id);
         void Update(T item);
         List<T> GetAll();
+        T GetByID(Guid id);
     }
 }

@@ -1,0 +1,11 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml"; ;
+
+    IBLL<Award> bll = new AwardBLL();
+    Award award = bll.GetByID(new Guid(Request.Form["awId"]));
+
+    //TODO: del for all users
+    bll.DeleteByID(new Guid(Request.Form["awardId"]));
+}

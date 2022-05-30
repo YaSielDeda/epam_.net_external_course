@@ -21,9 +21,8 @@ namespace DAL
         }
         public void DeleteByID(Guid id)
         {
-            var i = _jsonDto.AwardIDUserID.FindIndex(x => x.Id == id);
-
-            _jsonDto.Users.RemoveAt(i);
+            var entity = GetByID(id);
+            _jsonDto.AwardIDUserID.Remove(entity);
 
             WriteAllChanges();
         }
@@ -41,5 +40,12 @@ namespace DAL
         }
 
         public void Update(AwardUser item) { }
+
+        public AwardUser GetByID(Guid id)
+        {
+            var i = _jsonDto.AwardIDUserID.FindIndex(x => x.Id == id);
+
+            return _jsonDto.AwardIDUserID[i];
+        }
     }
 }

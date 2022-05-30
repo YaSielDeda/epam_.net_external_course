@@ -11,5 +11,6 @@ namespace BLL
         void Create(T item);
         void DeleteByID(Guid id);
         List<T> GetAll();
+        T GetByID(Guid id);
     }
 }

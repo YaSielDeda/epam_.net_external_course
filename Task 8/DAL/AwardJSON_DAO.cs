@@ -11,7 +11,7 @@ namespace DAL
     public class AwardJSON_DAO : IDAO<Award>
     {
         private string _path = @"C:\Users\bereg\Documents\epam\Task 8\Data.json";
-        JSON_DTO _jsonDto;
+        private JSON_DTO _jsonDto;
         public AwardJSON_DAO()
         {
             string json = File.ReadAllText(_path);
@@ -19,13 +19,13 @@ namespace DAL
         }
         public void DeleteByID(Guid id)
         {
-            var i = _jsonDto.Awards.FindIndex(x => x.Id == id);
+            var i = GetByID(id);
 
-            _jsonDto.Awards.RemoveAt(i);
+            _jsonDto.Awards.Remove(i);
 
             WriteAllChanges();
         }
-        public Award GetById(Guid id) => _jsonDto.Awards.Where(x => x.Id == id).FirstOrDefault();
+        public Award GetByID(Guid id) => _jsonDto.Awards.Where(x => x.Id == id).FirstOrDefault();
         public List<Award> GetAll() => _jsonDto.Awards;
         public void Create(Award Award)
         {

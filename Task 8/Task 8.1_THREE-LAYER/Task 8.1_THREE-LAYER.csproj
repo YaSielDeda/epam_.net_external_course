@@ -116,6 +116,8 @@
     <Content Include="Pages\AddAward.cshtml" />
     <Content Include="Pages\DelUser.cshtml" />
     <Content Include="Pages\DelAward.cshtml" />
+    <Content Include="Pages\Helper\AskForDelete.cshtml" />
+    <Content Include="Pages\Helper\DeleteForAll.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -185,6 +187,7 @@
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

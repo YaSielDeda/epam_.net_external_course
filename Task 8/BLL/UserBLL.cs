@@ -24,5 +24,7 @@ namespace BLL
             _userDAO.DeleteByID(id);
         }
         public List<User> GetAll() => _userDAO.GetAll();
+
+        public User GetByID(Guid id) => _userDAO.GetByID(id);
     }
 }

@@ -25,5 +25,6 @@ namespace BLL
             _AwardDAO.DeleteByID(id);
         }
         public List<Award> GetAll() => _AwardDAO.GetAll();
+        public Award GetByID(Guid id) => _AwardDAO.GetByID(id);
     }
 }
