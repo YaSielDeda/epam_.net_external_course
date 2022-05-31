@@ -9,7 +9,8 @@ namespace BLL
     public interface IBLL<T>
     {
         void Create(T item);
-        void DeleteByID(Guid id);
+        bool DeleteByID(Guid id);
+        bool Update(T t);
         List<T> GetAll();
         T GetByID(Guid id);
     }

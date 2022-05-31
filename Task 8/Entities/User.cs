@@ -13,17 +13,29 @@ namespace Entities
         public int Age { get; set; }
         public User(string name, DateTime dateTime)
         {
-            if (dateTime > DateTime.Now)
-                throw new Exception("Are you from future?");
+            checkFuture(dateTime);
 
             Id = Guid.NewGuid();
             Name = name;
             DateOfBirth = dateTime;
             Age = DateTime.Now.Year - DateOfBirth.Year;
         }
+
+        private static void checkFuture(DateTime dateTime)
+        {
+            if (dateTime > DateTime.Now)
+                throw new Exception("Are you from future?");
+        }
+
         public User()
         {
 
+        }
+        public void UpdateDateOfBirth(DateTime dateTime)
+        {
+            checkFuture(dateTime);
+            DateOfBirth = dateTime;
+            Age = DateTime.Now.Year - DateOfBirth.Year;
         }
         public override string ToString()
         {

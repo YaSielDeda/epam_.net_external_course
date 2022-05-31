@@ -118,6 +118,8 @@
     <Content Include="Pages\DelAward.cshtml" />
     <Content Include="Pages\Helper\AskForDelete.cshtml" />
     <Content Include="Pages\Helper\DeleteForAll.cshtml" />
+    <Content Include="Pages\UpdUser.cshtml" />
+    <Content Include="Pages\UpdAward.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

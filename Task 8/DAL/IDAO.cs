@@ -9,8 +9,8 @@ namespace Task_8._1_THREE_LAYER.DAL
     public interface IDAO<T>
     {
         void Create(T item);
-        void DeleteByID(Guid id);
-        void Update(T item);
+        bool DeleteByID(Guid id);
+        bool Update(T t);
         List<T> GetAll();
         T GetByID(Guid id);
     }

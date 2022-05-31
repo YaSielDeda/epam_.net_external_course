@@ -1,0 +1,42 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
+}
+
+@if (IsPost)
+{
+    IBLL<Award> bll = new AwardBLL();
+    string errorMessage = null;
+
+    try
+    {
+        var award = bll.GetByID(new Guid(Request["id"]));
+        award.Title = Request["name"];
+
+        bll.Update(award);
+    }
+    catch (Exception ex)
+    {
+        errorMessage = ex.Message;
+    }
+
+    if (errorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @errorMessage
+        </div>
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>ID</label>
+        <input type="text" class="form-control" name="id">
+    </div>
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" name="name">
+    </div>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>

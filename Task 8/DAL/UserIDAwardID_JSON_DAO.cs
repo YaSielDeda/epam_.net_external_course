@@ -19,12 +19,13 @@ namespace DAL
             string json = File.ReadAllText(_path);
             _jsonDto = JsonConvert.DeserializeObject<JSON_DTO>(json);
         }
-        public void DeleteByID(Guid id)
+        public bool DeleteByID(Guid id)
         {
             var entity = GetByID(id);
-            _jsonDto.AwardIDUserID.Remove(entity);
+            var res = _jsonDto.AwardIDUserID.Remove(entity);
 
             WriteAllChanges();
+            return res;
         }
         public List<AwardUser> GetAll() => _jsonDto.AwardIDUserID;
         public void Create(AwardUser awardUser)
@@ -39,7 +40,7 @@ namespace DAL
             File.WriteAllText(_path, json);
         }
 
-        public void Update(AwardUser item) { }
+        public bool Update(AwardUser item) => false;
 
         public AwardUser GetByID(Guid id)
         {

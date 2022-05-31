@@ -11,20 +11,19 @@ namespace BLL
 {
     public class AwardBLL : IBLL<Award>
     {
-        private IDAO<Award> _AwardDAO;
+        private IDAO<Award> _awardDAO;
         public AwardBLL()
         {
-            _AwardDAO = new AwardJSON_DAO();
+            _awardDAO = new AwardJSON_DAO();
         }
         public void Create(Award item)
         {
-            _AwardDAO.Create(item);
+            _awardDAO.Create(item);
         }
-        public void DeleteByID(Guid id)
-        {
-            _AwardDAO.DeleteByID(id);
-        }
-        public List<Award> GetAll() => _AwardDAO.GetAll();
-        public Award GetByID(Guid id) => _AwardDAO.GetByID(id);
+        public bool DeleteByID(Guid id) => _awardDAO.DeleteByID(id);
+        public List<Award> GetAll() => _awardDAO.GetAll();
+        public Award GetByID(Guid id) => _awardDAO.GetByID(id);
+
+        public bool Update(Award t) => _awardDAO.Update(t);
     }
 }

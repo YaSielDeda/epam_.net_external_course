@@ -17,13 +17,13 @@ namespace Task_8._1_THREE_LAYER.DAL
             string json = File.ReadAllText(_path);
             _jsonDto = JsonConvert.DeserializeObject<JSON_DTO>(json);
         }
-        public void DeleteByID(Guid id)
+        public bool DeleteByID(Guid id)
         {
             var i = GetByID(id);
-
-            _jsonDto.Users.Remove(i);
+            var res = _jsonDto.Users.Remove(i);
 
             WriteAllChanges();
+            return res;
         }
         public User GetByID(Guid id) => _jsonDto.Users.Where(x => x.Id == id).FirstOrDefault();
         public List<User> GetAll() => _jsonDto.Users;
@@ -38,14 +38,19 @@ namespace Task_8._1_THREE_LAYER.DAL
             string json = JsonConvert.SerializeObject(_jsonDto);
             File.WriteAllText(_path, json);
         }
-        public void Update(User user)
+        public bool Update(User user)
         {
             var i = _jsonDto.Users.FindIndex(x => x == user);
 
-            if (user != null)
+            try
             {
                 _jsonDto.Users[i] = user;
                 WriteAllChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

@@ -20,15 +20,15 @@ namespace BLL
         {
             _awardUserDAO.Create(item);
         }
-
-        public void DeleteByID(Guid id)
-        {
-            _awardUserDAO.DeleteByID(id);
-        }
-
+        public bool DeleteByID(Guid id) => _awardUserDAO.DeleteByID(id);
         public List<AwardUser> GetAll() => _awardUserDAO.GetAll();
         //TODO
         public AwardUser GetByID(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(AwardUser t)
         {
             throw new NotImplementedException();
         }

@@ -17,13 +17,13 @@ namespace DAL
             string json = File.ReadAllText(_path);
             _jsonDto = JsonConvert.DeserializeObject<JSON_DTO>(json);
         }
-        public void DeleteByID(Guid id)
+        public bool DeleteByID(Guid id)
         {
             var i = GetByID(id);
-
-            _jsonDto.Awards.Remove(i);
+            var res = _jsonDto.Awards.Remove(i);
 
             WriteAllChanges();
+            return res;
         }
         public Award GetByID(Guid id) => _jsonDto.Awards.Where(x => x.Id == id).FirstOrDefault();
         public List<Award> GetAll() => _jsonDto.Awards;
@@ -38,15 +38,19 @@ namespace DAL
             string json = JsonConvert.SerializeObject(_jsonDto);
             File.WriteAllText(_path, json);
         }
-        public void Update(Award Award)
+        public bool Update(Award award)
         {
-            var i = _jsonDto.Awards.FindIndex(x => x == Award);
+            var i = _jsonDto.Awards.FindIndex(x => x == award);
 
-            if (Award != null)
+            try
             {
-                _jsonDto.Awards[i] = Award;
-
+                _jsonDto.Awards[i] = award;
                 WriteAllChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

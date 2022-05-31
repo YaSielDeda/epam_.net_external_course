@@ -19,12 +19,9 @@ namespace BLL
         {
             _userDAO.Create(item);
         }
-        public void DeleteByID(Guid id)
-        {
-            _userDAO.DeleteByID(id);
-        }
+        public bool DeleteByID(Guid id) => _userDAO.DeleteByID(id);
         public List<User> GetAll() => _userDAO.GetAll();
-
         public User GetByID(Guid id) => _userDAO.GetByID(id);
+        public bool Update(User t) => _userDAO.Update(t);
     }
 }
