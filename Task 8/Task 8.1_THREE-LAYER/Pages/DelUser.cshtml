@@ -1,0 +1,49 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
+
+    bool success = false;
+    string error = null;
+
+    if (IsPost)
+    {
+        IBLL<User> bll = new UserBLL();
+
+        try
+        {
+            bll.DeleteByID(new Guid(Request["userId"]));
+
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+}
+
+@if (IsPost)
+{
+    if (success)
+    {
+        <div class="alert alert-success" role="alert">
+            User is deleted!
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @error
+        </div>
+    }
+}
+
+<h1> Delete user</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="inputId">ID</label>
+        <input name="userId" type="text" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

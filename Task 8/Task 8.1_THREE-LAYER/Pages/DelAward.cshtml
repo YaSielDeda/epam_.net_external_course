@@ -1,0 +1,30 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
+
+    string error = null;
+
+    if (IsPost)
+    {
+        IBLL<Award> bll = new AwardBLL();
+
+        try
+        {
+            bll.DeleteByID(new Guid(Request["awardId"]));
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+}
+
+<h1> Delete award</h1>
+<form action='/Pages/Helper/AskForDelete.cshtml' method="post">
+    <div class="form-group">
+        <label for="inputId">ID</label>
+        <input name="awardId" type="text" class="form-control">
+    </div>
+    <button id="del" type="submit" class="btn btn-primary">Submit</button>
+</form>

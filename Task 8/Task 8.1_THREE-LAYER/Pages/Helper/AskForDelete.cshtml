@@ -1,0 +1,46 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
+
+    Award award = null;
+    IBLL<Award> bll = new AwardBLL();
+    bool notExists = false;
+
+    try
+    {
+        award = bll.GetByID(new Guid(Request.Form["awardId"]));
+    }
+    catch
+    {
+        notExists = true;
+    }
+}
+
+@if (!notExists)
+{
+    <h1> Delete award "@award.Title" for all users? </h1>
+    <form action='/Pages/Helper/DeleteForAll.cshtml' method="post">
+        <button id="delete" type="submit" class="btn btn-danger">Delete</button>
+        <input name="awId" type="hidden" value="@award.Id">
+    </form>
+    <button id="cancel" type="button" class="btn btn-secondary">Cancel</button>
+
+    <script>
+        $('#cancel').click(function () {
+            location.href = "/";
+        });
+    </script>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        Award with this id doesn't exists. Redirecting to main page...
+    </div>
+
+    <script>
+        window.setTimeout(function(){
+            window.location.href = '../../index'
+        }, 2000)()
+    </script>
+}

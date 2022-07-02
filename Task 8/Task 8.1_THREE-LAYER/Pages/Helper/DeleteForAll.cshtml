@@ -1,0 +1,20 @@
+﻿@using BLL;
+@using Entities;
+@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml"; ;
+
+    IBLL<Award> awardBll = new AwardBLL();
+    IBLL<AwardUser> awardUserBll = new AwardUserBLL();
+    Award award = awardBll.GetByID(new Guid(Request.Form["awId"]));
+
+    List<AwardUser> allAwardUsers = awardUserBll.GetAll().Where(x => x.AwardID == award.Id).ToList();
+    foreach (var item in allAwardUsers)
+    {
+        awardUserBll.DeleteByID(item.Id);
+    }
+
+    awardBll = new AwardBLL();
+    awardBll.DeleteByID(award.Id);
+
+    Response.Redirect("/");
+}

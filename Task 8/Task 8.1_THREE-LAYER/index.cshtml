@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Pages/Layouts/_BasicLayout.cshtml";
+}
+
+<table>
+    <tr><td><button id="UsersList" type="button" class="btn btn-primary btn-lg btn-block">Users list</button></td> <td><button id="AwardsList" type="button" class="btn btn-primary btn-lg btn-block">Awards list</button></td></tr>
+    <tr><td><button id="AddUser" type="button" class="btn btn-secondary btn-lg btn-block">Add user</button></td> <td><button id="AddAward" type="button" class="btn btn-secondary btn-lg btn-block">Add award</button></td></tr>
+    <tr><td><button id="DelUser" type="button" class="btn btn-secondary btn-lg btn-block">Delete user</button></td> <td><button id="DelAward" type="button" class="btn btn-secondary btn-lg btn-block">Delete award</button></td></tr>
+    <tr><td><button id="UpdUser" type="button" class="btn btn-secondary btn-lg btn-block">Update user</button></td> <td><button id="UpdAward" type="button" class="btn btn-secondary btn-lg btn-block">Update award</button></td></tr>
+</table>
+
+<script>
+    $('#UsersList').click(function () {
+        location.href = "/Pages/UsersList.aspx";
+    });
+</script>
+
+<script>
+    $('#AddUser').click(function () {
+        location.href = "/Pages/AddUser";
+    });
+</script>
+
+<script>
+    $('#DelUser').click(function () {
+        location.href = "/Pages/DelUser";
+    });
+</script>
+
+<script>
+    $('#UpdUser').click(function () {
+        location.href = "/Pages/UpdUser";
+    });
+</script>
+
+<script>
+    $('#AwardsList').click(function () {
+        location.href = "/Pages/AwardsList.aspx";
+    });
+</script>
+
+<script>
+    $('#AddAward').click(function () {
+        location.href = "/Pages/AddAward";
+    });
+</script>
+
+<script>
+    $('#DelAward').click(function () {
+        location.href = "/Pages/DelAward";
+    });
+</script>
+
+<script>
+    $('#UpdAward').click(function () {
+        location.href = "/Pages/UpdAward";
+    });
+</script>
+
